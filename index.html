@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Website File Upload</title>
+    <!-- bootstrap cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: steelblue;
+            color: #fff;
+            font-family: 'Muli', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #f2f2fe;
+            background-color: transparent;
+
+            background-clip: padding-box;
+            border-top: none;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+
+            border-bottom: 2px solid #ced4da;
+            border-radius: 0;
+
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        .form-control input {
+            background-color: transparent;
+            border: 0;
+            border-bottom: 2px #fff solid;
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            color: #fff;
+            position: relative;
+            z-index: 100;
+        }
+
+        
+
+        input:focus {
+            color: transparent;
+        }
+
+        input {
+            background-color: transparent;
+            border: 0;
+            border-bottom-width: 0px;
+            border-bottom-style: none;
+            border-bottom-color: currentcolor;
+            border-bottom: 2px #fff solid;
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 5px;
+        }
+
+
+        #event-registration {
+            width: 40%;
+            margin: 3% 30%;
+            padding: 2% 2%;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        }
+
+        section {
+            padding: 30px 0;
+            overflow: hidden;
+            display: block;
+
+        }
+
+        .btn {
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            background: lightblue;
+            color: black;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 16px;
+            border: 0;
+            border-radius: 5px;
+        }
+
+        .btn:focus {
+            outline: 0;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+        }
+        .btn-primary:hover {
+  color: black;
+  background-color: lightblue;
+  border-color: none;
+}
+
+
+
+        @media screen and (max-width: 1024px) {
+            #event-registration {
+                width: 80%;
+                margin: 10px 0;
+                padding: 2% 2%;
+                border-radius: 1rem;
+                box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            #event-registration {
+                width: 100%;
+                margin: 10px 0;
+                padding: 2% 2%;
+                border-radius: 1rem;
+                box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+            }
+
+            section {
+                display: block;
+                overflow: visible;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="event-registration" class="event-registration" style="background-color: rgba(0, 0, 0, 0.4);">
+        <form method="post" id="event-registration-form" action="">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputName">Name</label>
+                    <input name="name" type="text" class="form-control" id="inputName" placeholder="Name" required="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPhone">Phone Number</label>
+                    <input name="phone-number" type="text" class="form-control" id="inputPhone"
+                        placeholder="Phone Number" required="">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email"
+                        required="">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputDepartment">Department</label>
+                    <select name="department" id="inputDepartment" class="form-control" required="">
+                        <option selected="" value="">Select</option>
+                        <option value="IT">IT</option>
+                        <option value="EC">EC</option>
+                        <option value="ME">ME</option>
+                        <option value="EEE">EEE</option>
+                        <option value="CE">CE</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputCollege">College Name</label>
+                <input name="college" type="text" class="form-control" id="inputCollege" required="">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEvent">Event</label>
+                    <select name="event" id="inputEvent" class="form-control" required="">
+                        <option selected="" value="">Select</option>
+                        <option >Shadow Hack</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputYear">Year of Study</label>
+                    <select name="year" id="inputYear" class="form-control" required="">
+                        <option value="">Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="inputMember">Are you a Member : </label>
+                    <div class="form-check form-check-inline">
+                        <input name="member" class="form-check-input" type="radio" id="inputMemberYes" value="Yes" required>
+                        <label class="form-check-label" for="inputMemberYes">Yes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="member" id="inputMemberNo" value="No" required>
+                        <label class="form-check-label" for="inputMemberNo">No</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" value="Submit" id="submit"
+                onclick="showLoading()">Register</button>
+        </form>
+    </section>
+
+    <script>
+        const labels = document.querySelectorAll('.form-control label')
+
+        labels.forEach(label => {
+            label.innerHTML = label.innerText
+                .split('')
+                .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
+                .join('')
+        })
+    </script>
+</body>
+
+</html>
