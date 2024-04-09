@@ -142,7 +142,7 @@
                 width: 80%;
                 margin: 10px 0;
                 padding: 2% 2%;
-                border-radius: 1rem;
+                border-radius: 5px;
                 box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
             }
         }
@@ -152,7 +152,7 @@
                 width: 100%;
                 margin: 10px 0;
                 padding: 2% 2%;
-                border-radius: 1rem;
+                border-radius: 5px;
                 box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
             }
 
@@ -166,8 +166,8 @@
 
 <body>
     <section id="event-registration" class="event-registration" style="background-color: rgba(0, 0, 0, 0.4);">
-        <form method="post" id="event-registration-form" action="">
-            <div class="form-row">
+        <form id="event-registration-form">
+                  <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputName">Name</label>
                     <input name="name" type="text" class="form-control" id="inputName" placeholder="Name" required="">
@@ -233,20 +233,70 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Submit" id="submit"
-                onclick="showLoading()">Register</button>
+            <div class = "row">
+                <input name="image"  style="width: 100%;
+                border: 1px solid white;
+                border-radius: 24px;
+                margin: 10px 12px 15px;
+                outline: none;
+                padding: 8px 8px 8px 14px;
+                box-sizing: border-box;
+                transition: 0.3s;
+                background: transparent;
+                color: white;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;"
+                id="image" placeholder="Image or PDF" type="file" accept="image/*,application/pdf" required="">    
+
+            </div>
+            
+            <input type="text" name ="glob" id="glob"  value="" hidden>
+            <input type="text" name ="filetype" id="filetype" value=""  hidden>
+            <input type="text" name ="filename" id="filename" value=""  hidden>
+
+            <button type="submit" class="btn btn-primary" value="submit" id="submit"
+                
+                >Register</button>
         </form>
     </section>
-
+    <script src=" https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js "></script>
     <script>
-        const labels = document.querySelectorAll('.form-control label')
+                let fileInput = document.getElementById("image");
+                let filetype = document.getElementById("filetype");
+                let filename = document.getElementById("filename");
+                let fileglob = document.getElementById("glob");
 
-        labels.forEach(label => {
-            label.innerHTML = label.innerText
-                .split('')
-                .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
-                .join('')
-        })
+                fileInput.addEventListener('change', () => {
+                    let file = fileInput.files[0];
+
+                    if (file) {
+                        let fr = new FileReader();
+                        fr.readAsDataURL(file);
+
+                        fr.onload = (e) => {
+                            let res = e.target.result;
+                            let glob = res.split("base64,")[1];
+                            filetype.value = file.type;
+                            filename.value = file.name;
+                            fileglob.value = glob;
+                            // console.log(filetype.value);
+                            // console.log(filename.value);
+                            // console.log(fileglob.value);
+                        };
+                    }
+                });
+
+
+                $("#event-registration-form").submit(function(e) {  
+                    console.log(e);
+                });
+
+
+        		
+
+        
+ 
     </script>
 </body>
 
