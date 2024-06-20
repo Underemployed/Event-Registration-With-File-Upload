@@ -2,187 +2,35 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Static Website File Upload</title>
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: steelblue;
-            color: #fff;
-            font-family: 'Muli', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            margin: 0;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            text-align: left;
-        }
-
-
-
-        .form-control {
-            display: block;
-            width: 100%;
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #f2f2fe;
-            background-color: transparent;
-
-            background-clip: padding-box;
-            border-top: none;
-            border-bottom: none;
-            border-left: none;
-            border-right: none;
-
-            border-bottom: 2px solid #ced4da;
-            border-radius: 0;
-
-            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        }
-
-        .form-control input {
-            background-color: transparent;
-            border: 0;
-            border-bottom: 2px #fff solid;
-            display: block;
-            width: 100%;
-            padding: 15px 0;
-            font-size: 18px;
-            color: #fff;
-            position: relative;
-            z-index: 100;
-        }
-
-        
-
-        input:focus {
-            color: transparent;
-        }
-
-        input {
-            background-color: transparent;
-            border: 0;
-            border-bottom-width: 0px;
-            border-bottom-style: none;
-            border-bottom-color: currentcolor;
-            border-bottom: 2px #fff solid;
-            display: block;
-            width: 100%;
-            padding: 15px 0;
-            font-size: 18px;
-            color: #fff;
-        }
-
-        .container {
-            background-color: rgba(0, 0, 0, 0.4);
-            border-radius: 5px;
-        }
-
-
-        #event-registration {
-            width: 40%;
-            margin: 3% 30%;
-            padding: 2% 2%;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-        }
-
-        section {
-            padding: 30px 0;
-            overflow: hidden;
-            display: block;
-
-        }
-
-        .btn {
-            cursor: pointer;
-            display: inline-block;
-            width: 100%;
-            background: lightblue;
-            color: black;
-            padding: 15px;
-            font-family: inherit;
-            font-size: 16px;
-            border: 0;
-            border-radius: 5px;
-        }
-
-        .btn:focus {
-            outline: 0;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        *,
-        ::after,
-        ::before {
-            box-sizing: border-box;
-        }
-        .btn-primary:hover {
-  color: black;
-  background-color: lightblue;
-  border-color: none;
-}
-
-
-
-        @media screen and (max-width: 1024px) {
-            #event-registration {
-                width: 80%;
-                margin: 10px 0;
-                padding: 2% 2%;
-                border-radius: 5px;
-                box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            #event-registration {
-                width: 100%;
-                margin: 10px 0;
-                padding: 2% 2%;
-                border-radius: 5px;
-                box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-            }
-
-            section {
-                display: block;
-                overflow: visible;
-            }
-        }
-    </style>
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <section id="event-registration" class="event-registration" style="background-color: rgba(0, 0, 0, 0.4);">
+    <section id="event-registration" class="event-registration" style="background-color: rgba(0, 0, 0, 0.4)">
         <form id="event-registration-form">
-                  <div class="form-row">
+            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputName">Name</label>
-                    <input name="name" type="text" class="form-control" id="inputName" placeholder="Name" required="">
+                    <input name="FullName" type="text" class="form-control" id="inputName" placeholder="Name"
+                        required="" />
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPhone">Phone Number</label>
                     <input name="phone-number" type="text" class="form-control" id="inputPhone"
-                        placeholder="Phone Number" required="">
+                        placeholder="Phone Number" required="" />
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail">Email</label>
                     <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email"
-                        required="">
+                        required="" />
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputDepartment">Department</label>
@@ -199,14 +47,14 @@
             </div>
             <div class="form-group">
                 <label for="inputCollege">College Name</label>
-                <input name="college" type="text" class="form-control" id="inputCollege" required="">
+                <input name="college" type="text" class="form-control" id="inputCollege" required="" />
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEvent">Event</label>
                     <select name="event" id="inputEvent" class="form-control" required="">
                         <option selected="" value="">Select</option>
-                        <option >Shadow Hack</option>
+                        <option>Shadow Hack</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -224,79 +72,73 @@
                 <div class="form-group col-md-12">
                     <label for="inputMember">Are you a Member : </label>
                     <div class="form-check form-check-inline">
-                        <input name="member" class="form-check-input" type="radio" id="inputMemberYes" value="Yes" required>
+                        <input name="member" class="form-check-input" type="radio" id="inputMemberYes" value="Yes"
+                            required />
                         <label class="form-check-label" for="inputMemberYes">Yes</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="member" id="inputMemberNo" value="No" required>
+                        <input class="form-check-input" type="radio" name="member" id="inputMemberNo" value="No"
+                            required />
                         <label class="form-check-label" for="inputMemberNo">No</label>
                     </div>
                 </div>
             </div>
-            <div class = "row">
-                <input name="image"  style="width: 100%;
-                border: 1px solid white;
-                border-radius: 24px;
-                margin: 10px 12px 15px;
-                outline: none;
-                padding: 8px 8px 8px 14px;
-                box-sizing: border-box;
-                transition: 0.3s;
-                background: transparent;
-                color: white;
-                font-family: inherit;
-                font-size: inherit;
-                line-height: inherit;"
-                id="image" placeholder="Image or PDF" type="file" accept="image/*,application/pdf" required="">    
-
+            <div class="row">
+                <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*" required="" />
             </div>
-            
-            <input type="text" name ="glob" id="glob"  value="" hidden>
-            <input type="text" name ="filetype" id="filetype" value=""  hidden>
-            <input type="text" name ="filename" id="filename" value=""  hidden>
 
-            <button type="submit" class="btn btn-primary" value="submit" id="submit"
-                
-                >Register</button>
+            <input type="text" name="base64" id="glob" value="" hidden />
+            <input type="text" name="type" id="filetype" value="" hidden />
+            <input type="text" name="name" id="filename" value="" hidden />
+
+            <button type="submit" class="btn btn-primary" value="submit" id="submit">
+                Register
+            </button>
         </form>
     </section>
     <script src=" https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js "></script>
     <script>
-                let fileInput = document.getElementById("image");
-                let filetype = document.getElementById("filetype");
-                let filename = document.getElementById("filename");
-                let fileglob = document.getElementById("glob");
+        let fileInput = document.getElementById("image");
+        let filetype = document.getElementById("filetype");
+        let filename = document.getElementById("filename");
+        let fileglob = document.getElementById("glob");
 
-                fileInput.addEventListener('change', () => {
-                    let file = fileInput.files[0];
+        fileInput.addEventListener("change", () => {
+            let file = fileInput.files[0];
 
-                    if (file) {
-                        let fr = new FileReader();
-                        fr.readAsDataURL(file);
+            let fr = new FileReader();
+            fr.onload = (e) => {
+                let res = e.target.result;
+                let glob = res.split("base64,")[1];
+                filetype.value = file.type;
+                filename.value = file.name;
+                fileglob.value = glob;
+            };
+            fr.readAsDataURL(file);
+        });
 
-                        fr.onload = (e) => {
-                            let res = e.target.result;
-                            let glob = res.split("base64,")[1];
-                            filetype.value = file.type;
-                            filename.value = file.name;
-                            fileglob.value = glob;
-                            // console.log(filetype.value);
-                            // console.log(filename.value);
-                            // console.log(fileglob.value);
-                        };
-                    }
-                });
-
-
-                $("#event-registration-form").submit(function(e) {  
-                    console.log(e);
-                });
-
-
-        		
-
-        
- 
+        $("#event-registration-form").submit((e) => {
+            e.preventDefault();
+            var formData = $("#event-registration-form").serializeArray();
+            var data = {};
+            $(formData).each(function (index, obj) {
+                data[obj.name] = obj.value;
+            });
+            $.ajax({
+                url: 'https://script.google.com/macros/s/AKfycbxu6RgeQ7eeLa6SaeNOuv-QXy75-nzWrMi-ieUDadIiW7HoDxG-mTKh9Mm2k5lM_xYM/exec',
+                data: JSON.stringify(data), // convert data to JSON
+                method: "POST",
+                success: function (response) {
+                    //       console.log(response);
+                    alert("Successfully Registered");
+                },
+                error: function (err) {
+                    // console.log(err);
+                    // alert(err.message);
+                    alert("Error in Submitting Form")
+                }
+            })
+        })
     </script>
 </body>
 
