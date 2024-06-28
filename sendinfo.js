@@ -2,7 +2,6 @@
 // REQUIRED
 const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbzCJLjHR3wFwSRT6FT_xnzNqZja3q_M6f7GD6kmhXPAfb7bc7wKhzXPPprppyNufQ/exec";
 
-
 let fileInput = document.getElementById("image");
 let filetype = document.getElementById("filetype");
 let filename = document.getElementById("filename");
