@@ -1,3 +1,8 @@
+// BY Underemployed 28-06-2024
+// REQUIRED
+const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbzCJLjHR3wFwSRT6FT_xnzNqZja3q_M6f7GD6kmhXPAfb7bc7wKhzXPPprppyNufQ/exec";
+
+
 let fileInput = document.getElementById("image");
 let filetype = document.getElementById("filetype");
 let filename = document.getElementById("filename");
@@ -25,11 +30,11 @@ $("#event-registration-form").submit((e) => {
         data[obj.name] = obj.value;
     });
     $.ajax({
-        url: 'https://script.google.com/macros/s/AKfycbxu6RgeQ7eeLa6SaeNOuv-QXy75-nzWrMi-ieUDadIiW7HoDxG-mTKh9Mm2k5lM_xYM/exec',
+        url: APPSCRIPT_URL, // required
         data: JSON.stringify(data), // convert data to JSON
         method: "POST",
         success: function (response) {
-            //       console.log(response);
+            // console.log(response);
             alert("Successfully Registered");
         },
         error: function (err) {
