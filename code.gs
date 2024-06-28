@@ -1,7 +1,7 @@
-let app = SpreadsheetApp.openByUrl(
-  "https://docs.google.com/spreadsheets/d/1qAYa-E0PuYPqQ2Qdci_d6MltYfFDW8cNTS9w-ynq2OU/edit?usp=sharing"
-);
-
+// let app = SpreadsheetApp.openByUrl(
+//   "https://docs.google.com/spreadsheets/d/1qAYa-E0PuYPqQ2Qdci_d6MltYfFDW8cNTS9w-ynq2OU/edit?usp=sharing");
+let app = SpreadsheetApp.getActiveSpreadsheet();
+let gdrivefolder = "Subscription";
 let sheet = app.getSheetByName("Sheet1");
 
 function doPost(e) {
@@ -16,8 +16,8 @@ function doPost(e) {
     // Decode the base64-encoded image
     let dcode = Utilities.base64Decode(obj.base64);
 
-    // Get the folder by name
-    let folderIterator = DriveApp.getFoldersByName("Subscription");
+    // Get the gdrive folder by name where the image is uploaded
+    let folderIterator = DriveApp.getFoldersByName(gdrivefolder);
     if (!folderIterator.hasNext()) {
       throw new Error("Folder not found");
     }
@@ -46,24 +46,19 @@ function doPost(e) {
     }
 
     let lr = sheet.getLastRow();
-    sheet.appendRow(a);
+    // sheet.appendRow(a); for coloumn titles  uncomment for first run
     sheet.appendRow(Object.values(l));
 
     return ContentService.createTextOutput(
-      JSON.stringify({ status: "success", message: "HAPPY" })
+      JSON.stringify({ "status": "success", "message": "Operation completed successfully."})
     ).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     Logger.log(err);
-    return ContentService.createTextOutput(
-      JSON.stringify({
-        status: "error",
-        message: err.message,
-      })
-    ).setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(
+  JSON.stringify({
+    status: "error",
+    message: err.message,
+  })
+).setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-function doGet(e) {
-  Logger.log(e);
-  return ContentService.createTextOutput("Received GET request");
 }
