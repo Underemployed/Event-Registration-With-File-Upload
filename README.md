@@ -24,7 +24,7 @@ This project demonstrates how to create an event registration form that allows u
 Clone the repository to get the source code, including HTML, JavaScript, and CSS files.
 
 ```sh
-git clone https://github.com/Underemployed/Static-Website-File-Upload.git
+git clone https://github.com/Underemployed/Event-Registration-With-File-Upload.git
 ```
 
 ### 2. Create a Google Sheet
@@ -52,6 +52,14 @@ Host the HTML, CSS, and JavaScript files from the cloned repository on your pref
 - Both the Google Drive folder and the Google Sheets must be set to "Anyone can view" for the AppScript to work properly.
 - Make sure to update the `APPSCRIPT_URL` in the `sendinfo.js` file to the URL of your deployed Apps Script.
 - Make sure Google Drive folder name is accurate
-- 
+
 ## Summary
 By following these steps, you can set up a system that allows users to register for events and upload files, with the data being stored in a Google Drive folder and logged in a Google Sheet. The provided repository contains all necessary code, and the Google Apps Script handles the backend processing.
+
+
+### License
+This project is licensed under the Apache License 2.0. For more details, see the [LICENSE](https://github.com/Underemployed/Event-Registration-With-File-Upload/blob/main/LICENSE) file in the repository.
+
+---
+
+Feel free to contribute to this project by submitting pull requests or issues on the [GitHub repository](https://github.com/Underemployed/Event-Registration-With-File-Upload). Your contributions are welcome!
