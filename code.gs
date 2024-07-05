@@ -3,10 +3,30 @@
 // let app = SpreadsheetApp.openByUrl(
 //   "custom_google_sheet_link_must_be_set_to_anyone_can_view");
 let app = SpreadsheetApp.getActiveSpreadsheet();
-// google drive file required
+// GOOGLE DRIVE FOLDER REQUIRED
 let gdrivefolder = "Subscription";
 let sheet = app.getSheetByName("Sheet1");
-console.log(sheet.getLastRow())
+// console.log(sheet.getLastRow())
+
+function doPost(e) {
+  try {
+    let obj = validateInput(e);
+    let dcode = Utilities.base64Decode(obj.base64);
+    let folder = getDriveFolderByName(gdrivefolder);
+    let newFile = createFileInFolder(folder, dcode, obj);
+    let fileInfo = prepareFileInfo(newFile, obj);
+    // Extract event name from fileInfo
+    let eventName = fileInfo.event; // Assuming 'event' is the key for event name
+    // Select or create sheet based on event name
+    let eventSheet = selectOrCreateSheet(eventName);
+    // Append fileInfo to the event-specific sheet
+    appendFileInfoToSheet(fileInfo, eventSheet);
+    return createSuccessResponse();
+  } catch (err) {
+    Logger.log(err);
+    return createErrorResponse(err);
+  }
+}
 
 
 function doPost(e) {
@@ -17,7 +37,12 @@ function doPost(e) {
     let folder = getDriveFolderByName(gdrivefolder);
     let newFile = createFileInFolder(folder, dcode, obj);
     let fileInfo = prepareFileInfo(newFile, obj);
-    appendFileInfoToSheet(fileInfo);
+    // GETTING EVENT NAME AND CREATING SHEET IF NECCESSARY
+    let eventName = fileInfo.event;
+    let eventSheet = selectOrCreateSheet(eventName);
+    appendFileInfoToSheet(fileInfo, eventSheet);
+
+
     return createSuccessResponse();
   } catch (err) {
     Logger.log(err);
@@ -47,20 +72,31 @@ function createFileInFolder(folder, decodedData, obj) {
 function prepareFileInfo(newFile, obj) {
   let dateTime = new Date();
   let fileInfo = {
-    link: newFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW).getUrl(),
-    date: dateTime.toLocaleDateString(),
-    time: dateTime.toLocaleTimeString()
+    Link: newFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW).getUrl(),
+    Time: dateTime.toLocaleTimeString(),
+    Date: dateTime.toLocaleDateString()
+
   };
   for (let key in obj) {
-    if (obj.hasOwnProperty(key) && !['base64', 'type', 'name'].includes(key)) {
       fileInfo[key] = obj[key];
-    }
   }
+  
   return fileInfo;
 }
+// create or return existing sheet
+function selectOrCreateSheet(sheetName) {
+  let existingSheet = app.getSheetByName(sheetName);
+  if (existingSheet) {
+    return existingSheet;
+  } else {
+    return app.insertSheet(sheetName);
+  }
+}
+  
 
-function appendFileInfoToSheet(fileInfo) {
-  const headers = ["Link", "Date", "Time", ...Object.keys(fileInfo).slice(3)]; // slice and remove file upload change according to form!!! 
+
+function appendFileInfoToSheet(fileInfo,sheet) {
+  const headers = [...Object.keys(fileInfo)]; // slice and remove file upload change according to form!!! 
   //in my form these data are towards end
 
   let lastRow = sheet.getLastRow();
@@ -76,6 +112,33 @@ function createSuccessResponse() {
 }
 
 function createErrorResponse(err) {
+  let errorSheet = app.getSheetByName("Errors");
+
+  // logs are stored in sheet2
+  let dateTime = new Date();
+  let errorInfo = [dateTime.toLocaleString(), err.message];
+  let lastRow = errorSheet.getLastRow();
+  // column titles
+  if (lastRow === 0) errorSheet.appendRow(["Date","Error Message"]);
+  errorSheet.appendRow(errorInfo);
+
+
   return ContentService.createTextOutput(JSON.stringify({ "status": "error", "message": err.message}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet(e) {
+  let eventsheet = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = eventsheet.getSheetByName("Events");
+  let dataRange = sheet.getDataRange();
+  let data = dataRange.getValues();
+  
+  let events = data.slice(1).map(row => row[0]); 
+
+  // Create a JSON response
+  let jsonResponse = JSON.stringify({ "Event Names": events });
+  console.log(jsonResponse);
+  // Return the JSON response
+  return ContentService.createTextOutput(jsonResponse)
     .setMimeType(ContentService.MimeType.JSON);
 }
