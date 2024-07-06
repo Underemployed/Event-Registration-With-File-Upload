@@ -8,7 +8,8 @@
     <!-- bootstrap cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/loader.css" />
 </head>
 
 <body>
@@ -82,25 +83,29 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*" required="" />
+            <!-- file upload -->
+            <div id="fileupload">
+                <div class="row">
+                    <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*"
+                        required="" />
+                </div>
+
+                <input type="text" name="base64" id="glob" value="" hidden />
+                <input type="text" name="type" id="filetype" value="" hidden />
+                <input type="text" name="name" id="filename" value="" hidden />
             </div>
-
-            <input type="text" name="base64" id="glob" value="" hidden />
-            <input type="text" name="type" id="filetype" value="" hidden />
-            <input type="text" name="name" id="filename" value="" hidden />
-
             <button type="submit" class="btn btn-primary" value="submit" id="submit">
                 Register
             </button>
         </form>
     </section>
+    <!-- loader animation -->
     <div class="loader-div">
         <img class="loader-img" src="loading.gif" style="height: 120px;width: auto;" />
-    </div> 
+    </div>
     <div class="send-div">
         <img class="loader-img" src="send.gif" style="height: 150px;width: auto;" />
-    </div> 
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js "></script>
     <script src="sendinfo.js"></script>
 </body>

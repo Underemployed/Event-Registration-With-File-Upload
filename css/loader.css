@@ -1,0 +1,55 @@
+/*
+<!-- child of body  -->
+<div class="loader-div">
+<img class="loader-img" src="loading.gif" style="height: 120px;width: auto;" />
+</div> 
+<div class="send-div">
+<img class="loader-img" src="send.gif" style="height: 150px;width: auto;" />
+</div>  */
+
+/* 
+    // submit animation
+    $(".send-div").show(); // show loader
+    $(".send-div").hide(); // hide loader
+
+    // loading animation
+    $(".loader-div").show(); // show loader
+    $(".loader-div").hide(); // hide loader
+    
+*/
+
+
+.loader-div {
+    display: none;
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 30001;
+    opacity: 0.8;
+  }
+  .send-div {
+    display: none;
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 30001;
+    opacity: 0.8;
+  }
+  .loader-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
