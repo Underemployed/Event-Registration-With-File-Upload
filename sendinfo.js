@@ -45,12 +45,13 @@ const fileuploadGen = (label, yes) => {
             fr.readAsDataURL(file);
         });
     }
+
 }
 
 $("#event-registration-form").submit((e) => {
     e.preventDefault();
 
-    $(".send-div").show(); // show loader
+    $(".send-div").fadeIn(1000); // show loader
 
     var formData = $("#event-registration-form").serializeArray();
     var data = {};
@@ -86,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function fetchEvents() {
-    $(".loader-div").show(); // Show loader
+    $(".loader-div").fadeIn(1000); // Show loader
 
     fetch(APPSCRIPT_URL)
         .then(response => response.json())
@@ -114,11 +115,12 @@ function updateEventDropdown(eventsData) {
 
 // load file upload based on excel data
 document.getElementById('inputEvent').onchange = function () {
-    $("update-div").show();
+    $("update-div").fadeIn(1000);
     const selectedEventName = this.value;
     const selectedEvent = eventsData.find(event => event.name === selectedEventName);
     if (selectedEvent) {
         fileuploadGen(selectedEvent.label, selectedEvent.paid);
+        $("update-div").delay(1000).fadeOut();
     }
-    $("update-div").delay(1000).fadeOut();
 };
+
