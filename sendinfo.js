@@ -11,19 +11,19 @@ const fileuploadGen = (label, yes) => {
     let fileupload = document.getElementById("fileupload");
 
     if (!yes) {
-       fileupload.innerHTML="";
+        fileupload.innerHTML = "";
         return;
     } else {
 
         fileupload.innerHTML =
-            `<div class="row">
-        <label for="image" class = "upload">` + label + `</label>
+        `<div class="row">
+            <label for="image" class="upload">` + label + `</label>
             <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*" required="" />
-     </div>
+        </div>
 
-     <input type="text" name="base64" id="glob" value="" hidden />
-     <input type="text" name="type" id="filetype" value="" hidden />
-     <input type="text" name="name" id="filename" value="" hidden />`;
+        <input type="text" name="base64" id="glob" value="" hidden />
+        <input type="text" name="type" id="filetype" value="" hidden />
+        <input type="text" name="name" id="filename" value="" hidden />`;
 
 
         let fileInput = document.getElementById("image");

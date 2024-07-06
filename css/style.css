@@ -112,6 +112,7 @@ section {
 ::before {
   box-sizing: border-box;
 }
+
 .btn-primary:hover {
   color: black;
   background-color: lightblue;
@@ -160,7 +161,7 @@ input[type="file"] {
 }
 
 
-.upload{  
+.upload {
   margin-left: 0.9rem;
   margin-bottom: none;
 }
