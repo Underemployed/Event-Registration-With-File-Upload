@@ -1,7 +1,6 @@
-// BY Underemployed 28-06-2024
+// BY Underemployed 05-07-2024
 
-// let app = SpreadsheetApp.openByUrl(
-//   "custom_google_sheet_link_must_be_set_to_anyone_can_view");
+// let app = SpreadsheetApp.openByUrl("custom_google_sheet_link_must_be_set_to_anyone_can_view");
 let app = SpreadsheetApp.getActiveSpreadsheet();
 // GOOGLE DRIVE FOLDER REQUIRED
 let gdrivefolder = "Subscription";
@@ -16,7 +15,7 @@ function doPost(e) {
     let newFile = createFileInFolder(folder, dcode, obj);
     let fileInfo = prepareFileInfo(newFile, obj);
     // Extract event name from fileInfo
-    let eventName = fileInfo.event; // Assuming 'event' is the key for event name
+    let eventName = fileInfo.event; 
     // Select or create sheet based on event name
     let eventSheet = selectOrCreateSheet(eventName);
     // Append fileInfo to the event-specific sheet
