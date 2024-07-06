@@ -28,17 +28,26 @@ $("#event-registration-form").submit((e) => {
     $(formData).each(function (index, obj) {
         data[obj.name] = obj.value;
     });
+    $(".send-div").show(); // show loader
+
     $.ajax({
         url: APPSCRIPT_URL, // required
         data: JSON.stringify(data), // convert data to JSON
         method: "POST",
         success: function (response) {
+            $(".send-div").hide(); // hide loader
+
             // console.log(response);
+
             alert("Successfully Registered");
         },
         error: function (err) {
+            $(".send-div").hide(); // hide loader
+
             // console.log(err);
             // alert(err.message);
+
+
             alert("Error in Submitting Form")
         }
     })
