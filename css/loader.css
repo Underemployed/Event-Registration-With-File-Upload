@@ -15,7 +15,6 @@
     // loading animation
     $(".loader-div").show(); // show loader
     $(".loader-div").hide(); // hide loader
-    
 */
 
 
@@ -33,6 +32,19 @@
     opacity: 0.8;
   }
   .send-div {
+    display: none;
+    position: fixed;
+    margin: 0px;
+    padding: 0px;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 30001;
+    opacity: 0.8;
+  }
+  .update-div {
     display: none;
     position: fixed;
     margin: 0px;

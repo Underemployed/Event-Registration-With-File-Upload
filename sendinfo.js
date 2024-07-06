@@ -1,25 +1,49 @@
 // BY Underemployed 05-07-2024
 // REQUIRED
-const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbxN6mGfyRle3fyEl7Qdx9qSc4H2f2jZAAkhkG5O6OjlmawYShP6KPXjEuY5_LqPB5Gu/exec";
+const APPSCRIPT_URL = `
+https://script.google.com/macros/s/AKfycbxJMcmC-kNnSbnUMURVr-WOyvuDHbLSygu9BaHVihGmHuh1Bpx7aJ1xygMZORRbxlY3/exec
+`.trim();
+let eventsData = [];
 
-let fileInput = document.getElementById("image");
-let filetype = document.getElementById("filetype");
-let filename = document.getElementById("filename");
-let fileglob = document.getElementById("glob");
+const fileuploadGen = (label,yes) => {
+    let fileupload = document.getElementById("fileupload");
 
-fileInput.addEventListener("change", () => {
-    let file = fileInput.files[0];
+    if(!yes) {
+        fileupload.innerHTML="";
+        return 0;
+    }
 
-    let fr = new FileReader();
-    fr.onload = (e) => {
-        let res = e.target.result;
-        let glob = res.split("base64,")[1];
-        filetype.value = file.type;
-        filename.value = file.name;
-        fileglob.value = glob;
-    };
-    fr.readAsDataURL(file);
-});
+    fileupload.innerHTML = 
+    `<div class="row">
+        <label for="image">` + label + `</label>
+            <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*" required="" />
+     </div>
+
+     <input type="text" name="base64" id="glob" value="" hidden />
+     <input type="text" name="type" id="filetype" value="" hidden />
+     <input type="text" name="name" id="filename" value="" hidden />`;
+
+
+    let fileInput = document.getElementById("image");
+    let filetype = document.getElementById("filetype");
+    let filename = document.getElementById("filename");
+    let fileglob = document.getElementById("glob");
+
+    fileInput.addEventListener("change", () => {
+        let file = fileInput.files[0];
+
+        let fr = new FileReader();
+        fr.onload = (e) => {
+            let res = e.target.result;
+            let glob = res.split("base64,")[1];
+            filetype.value = file.type;
+            filename.value = file.name;
+            fileglob.value = glob;
+        };
+        fr.readAsDataURL(file);
+    });
+
+}
 
 $("#event-registration-form").submit((e) => {
     e.preventDefault();
@@ -37,16 +61,16 @@ $("#event-registration-form").submit((e) => {
         method: "POST",
         success: function (response) {
 
-            $(".send-div").hide(); // hide loader
+            $(".send-div").delay(1000).fadeOut();  // hide loader
 
             // console.log(response);
             alert("Successfully Registered");
 
-            
+
         },
         error: function (err) {
 
-            $(".send-div").hide(); // hide loader
+            $(".send-div").delay(1000).fadeOut();  // hide loader
 
             // console.log(err);
             // alert(err.message);
@@ -55,7 +79,7 @@ $("#event-registration-form").submit((e) => {
     })
 })
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     fetchEvents();
 });
 
@@ -65,21 +89,31 @@ function fetchEvents() {
     fetch(APPSCRIPT_URL)
         .then(response => response.json())
         .then(data => {
-            const events = data['Event Names'];
-            updateEventDropdown(events);
-            $(".loader-div").hide(); 
+            eventsData = data['Event Names'];
+            updateEventDropdown(eventsData);
+            $(".loader-div").delay(1000).fadeOut(); 
         })
         .catch(error => {
             console.error('Error fetching events:', error);
-            $(".loader-div").hide(); 
+            $(".loader-div").delay(1000).fadeOut(); 
         });
 }
 
-function updateEventDropdown(events) {
+function updateEventDropdown(eventsData) {
     const dropdown = document.getElementById('inputEvent');
-    dropdown.length = 1;
-    events.forEach(event => {
-        const option = new Option(event, event); 
+    dropdown.length = 1; 
+    eventsData.forEach(event => {
+        const option = new Option(event.name, event.name); // Use event.name for both text and value
         dropdown.add(option);
     });
 }
+
+document.getElementById('inputEvent').onchange = function() {
+    $("update-div").show();
+    const selectedEventName = this.value;
+    const selectedEvent = eventsData.find(event => event.name === selectedEventName);
+    if (selectedEvent) {
+        fileuploadGen(selectedEvent.label, selectedEvent.paid ? 'yes' : 'no');
+    }
+    $("update-div").delay(1000).fadeOut(); 
+};

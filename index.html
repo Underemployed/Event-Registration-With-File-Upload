@@ -51,6 +51,7 @@
                 <input name="college" type="text" class="form-control" id="inputCollege" required="" />
             </div>
             <div class="form-row">
+                <!-- event dropdown -->
                 <div class="form-group col-md-6">
                     <label for="inputEvent">Event</label>
                     <select name="event" id="inputEvent" class="form-control" required="">
@@ -83,16 +84,9 @@
                     </div>
                 </div>
             </div>
-            <!-- file upload -->
+            <!-- payment upload -->
             <div id="fileupload">
-                <div class="row">
-                    <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*"
-                        required="" />
-                </div>
-
-                <input type="text" name="base64" id="glob" value="" hidden />
-                <input type="text" name="type" id="filetype" value="" hidden />
-                <input type="text" name="name" id="filename" value="" hidden />
+                
             </div>
             <button type="submit" class="btn btn-primary" value="submit" id="submit">
                 Register
@@ -105,6 +99,9 @@
     </div>
     <div class="send-div">
         <img class="loader-img" src="send.gif" style="height: 150px;width: auto;" />
+    </div>
+    <div class="update-div">
+        <img class="loader-img" src="updating.gif" style="height: 150px;width: auto;" />
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js "></script>
     <script src="sendinfo.js"></script>
