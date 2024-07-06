@@ -1,21 +1,23 @@
 // BY Underemployed 05-07-2024
 // REQUIRED
 const APPSCRIPT_URL = `
-https://script.google.com/macros/s/AKfycbxJMcmC-kNnSbnUMURVr-WOyvuDHbLSygu9BaHVihGmHuh1Bpx7aJ1xygMZORRbxlY3/exec
+
+https://script.google.com/macros/s/AKfycbzeMsCOpiEcSqtJyPc30LH2IDV07w-QYWIWsYfLXlTUlcJ86SAq52Q_sMH1pl-6cSBj/exec
+
 `.trim();
 let eventsData = [];
 
-const fileuploadGen = (label,yes) => {
+const fileuploadGen = (label, yes) => {
     let fileupload = document.getElementById("fileupload");
 
-    if(!yes) {
-        fileupload.innerHTML="";
-        return 0;
-    }
+    if (!yes) {
+       fileupload.innerHTML="";
+        return;
+    } else {
 
-    fileupload.innerHTML = 
-    `<div class="row">
-        <label for="image">` + label + `</label>
+        fileupload.innerHTML =
+            `<div class="row">
+        <label for="image" class = "upload">` + label + `</label>
             <input name="image" id="image" placeholder="Image or PDF" type="file" accept="image/*" required="" />
      </div>
 
@@ -24,25 +26,25 @@ const fileuploadGen = (label,yes) => {
      <input type="text" name="name" id="filename" value="" hidden />`;
 
 
-    let fileInput = document.getElementById("image");
-    let filetype = document.getElementById("filetype");
-    let filename = document.getElementById("filename");
-    let fileglob = document.getElementById("glob");
+        let fileInput = document.getElementById("image");
+        let filetype = document.getElementById("filetype");
+        let filename = document.getElementById("filename");
+        let fileglob = document.getElementById("glob");
 
-    fileInput.addEventListener("change", () => {
-        let file = fileInput.files[0];
+        fileInput.addEventListener("change", () => {
+            let file = fileInput.files[0];
 
-        let fr = new FileReader();
-        fr.onload = (e) => {
-            let res = e.target.result;
-            let glob = res.split("base64,")[1];
-            filetype.value = file.type;
-            filename.value = file.name;
-            fileglob.value = glob;
-        };
-        fr.readAsDataURL(file);
-    });
-
+            let fr = new FileReader();
+            fr.onload = (e) => {
+                let res = e.target.result;
+                let glob = res.split("base64,")[1];
+                filetype.value = file.type;
+                filename.value = file.name;
+                fileglob.value = glob;
+            };
+            fr.readAsDataURL(file);
+        });
+    }
 }
 
 $("#event-registration-form").submit((e) => {
@@ -91,29 +93,32 @@ function fetchEvents() {
         .then(data => {
             eventsData = data['Event Names'];
             updateEventDropdown(eventsData);
-            $(".loader-div").delay(1000).fadeOut(); 
+            $(".loader-div").delay(1000).fadeOut();
         })
         .catch(error => {
             console.error('Error fetching events:', error);
-            $(".loader-div").delay(1000).fadeOut(); 
+            $(".loader-div").delay(1000).fadeOut();
         });
 }
 
+// add event names
 function updateEventDropdown(eventsData) {
     const dropdown = document.getElementById('inputEvent');
-    dropdown.length = 1; 
+    dropdown.length = 1;
     eventsData.forEach(event => {
-        const option = new Option(event.name, event.name); // Use event.name for both text and value
+        const option = new Option(event.name, event.name);
         dropdown.add(option);
     });
 }
 
-document.getElementById('inputEvent').onchange = function() {
+
+// load file upload based on excel data
+document.getElementById('inputEvent').onchange = function () {
     $("update-div").show();
     const selectedEventName = this.value;
     const selectedEvent = eventsData.find(event => event.name === selectedEventName);
     if (selectedEvent) {
-        fileuploadGen(selectedEvent.label, selectedEvent.paid ? 'yes' : 'no');
+        fileuploadGen(selectedEvent.label, selectedEvent.paid);
     }
-    $("update-div").delay(1000).fadeOut(); 
+    $("update-div").delay(1000).fadeOut();
 };
