@@ -143,6 +143,14 @@ section {
     overflow: visible;
   }
 }
+@media screen and (max-width: 400px) {
+  body{
+    overflow: auto;
+  }
+  section{
+    overflow: auto;
+  }
+}
 
 input[type="file"] {
   width: 100%;
