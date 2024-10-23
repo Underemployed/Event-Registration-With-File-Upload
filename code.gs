@@ -38,6 +38,13 @@ function validateInput(e) {
   return obj;
 }
 
+function validateInput(e) {
+  if (!e.postData.contents) throw new Error("No data provided"); 
+  let obj = JSON.parse(e.postData.contents);
+  if (!obj.base64 || !obj.type || !obj.name) throw new Error("Missing required fields"); // image not found
+  return JSON.stringify(obj); 
+}
+
 function getDriveFolderByName(folderName) {
   let folderIterator = DriveApp.getFoldersByName(folderName);
   if (!folderIterator.hasNext()) throw new Error("Upload folder is missing! Please Contact the owner");// no google drive folder
